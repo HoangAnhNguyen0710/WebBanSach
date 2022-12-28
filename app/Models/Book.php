@@ -44,6 +44,10 @@ class Book extends Model
         'in_stock' => 'integer'
     ];
 
+    protected $attributes = [
+        'display' => false
+    ];
+
     public function category(){
         return $this->belongsTo(Category::class, 'category_id');
     }

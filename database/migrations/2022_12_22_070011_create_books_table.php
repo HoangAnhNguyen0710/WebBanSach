@@ -25,7 +25,7 @@ class CreateBooksTable extends Migration
             $table->text('type');
             $table->text('language');
             $table->text('description');
-            $table->boolean('display');
+            $table->boolean('display')->default(0);
             $table->bigInteger('price');
             $table->bigInteger('discount_price');
             $table->unsignedBigInteger('publisher_id');
