@@ -159,5 +159,8 @@ public function getDataFromCSV($fileRecords)
     return $dataList;
 }
 
+public function getOneBook($book_id) {
+    return $this->bookRepository->getOne($book_id);
+}
 }
 ?>
