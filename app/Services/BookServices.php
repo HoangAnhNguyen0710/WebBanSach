@@ -159,5 +159,12 @@ public function getDataFromCSV($fileRecords)
     return $dataList;
 }
 
+public function getListOfBooks(int $page, int $items_per_page, $filterCol, $filterValue = null) {
+
+    if($filterCol != null) {
+        return $this->bookRepository->getListOfBooksByFilter($page,  $items_per_page, $filterCol, $filterValue);
+    }
+    return $this->bookRepository->getListOfBooks($page, $items_per_page);
 }
-?>
+
+}

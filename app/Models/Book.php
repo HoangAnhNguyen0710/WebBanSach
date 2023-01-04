@@ -35,8 +35,6 @@ class Book extends Model
     ];
 
     protected $casts = [
-        'price' => 'long',
-        'discount_price' => 'long',
         'display' => 'boolean',
         'sold' => 'integer',
         'number_of_copies' => 'integer',

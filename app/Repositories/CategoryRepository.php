@@ -11,13 +11,15 @@ use Prettus\Repository\Eloquent\BaseRepository;
  *
  * @package namespace App\Repositories;
  */
-class CategoryRepository extends BaseRepository {
-    public function model() {
+class CategoryRepository extends BaseRepository
+{
+    public function model()
+    {
         return Category::class;
     }
 
-    public function getAll() {
+    public function getAll()
+    {
         return $this->model::query()->get('id')->toArray();
     }
 }
-
