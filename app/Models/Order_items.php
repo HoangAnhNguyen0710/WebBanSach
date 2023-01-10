@@ -13,7 +13,7 @@ class Order_items extends Model
    *
    * @var string
    */
-  protected $table = 'orders_items';
+  protected $table = 'order_items';
   protected $fillable = [
       "order_id",
       "book_id",

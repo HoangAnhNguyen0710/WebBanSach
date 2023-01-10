@@ -53,4 +53,9 @@ class BookRepository extends BaseRepository
             ->with('publisher', 'category')
             ->paginate($per_page, ['*'], 'page', $page);
     }
+
+    public function getListOfIds()
+    {
+        return $this->model->query()->get('id')->toArray();
+    }
 }
