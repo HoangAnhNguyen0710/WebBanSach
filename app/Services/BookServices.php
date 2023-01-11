@@ -159,6 +159,10 @@ public function getDataFromCSV($fileRecords)
     return $dataList;
 }
 
+public function getOneBook($book_id) {
+    return $this->bookRepository->getOne($book_id);
+}
+
 public function getListOfBooks(int $page, int $items_per_page, $filterCol, $filterValue = null) {
 
     if($filterCol != null) {
@@ -170,7 +174,7 @@ public function getListOfBooks(int $page, int $items_per_page, $filterCol, $filt
 public function getBooksBy(Request $request) {
     $searchString = $request->only('q')['q'];
     $searchPublisherID = $this->publisherRepository->getOneByName($searchString);
-    return $this->bookRepository->searchBooksBy($searchString, $searchPublisherID);
+    return $this->bookRepository->searchBooksBy($searchString, $searchPublisherID)->toArray();
 }
 
 }
