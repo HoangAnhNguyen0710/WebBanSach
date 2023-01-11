@@ -53,4 +53,13 @@ class BookRepository extends BaseRepository
             ->with('publisher', 'category')
             ->paginate($per_page, ['*'], 'page', $page);
     }
+
+    public function searchBooksBy(string $search, $publisherSearchID) {
+        return $this->model->with('publisher', 'category')
+            ->where('name', 'LIKE', '%'.$search.'%')
+            ->orWhereIn('publisher_id', $publisherSearchID)
+            ->where('display', 1)
+            ->get()
+            ->toArray();
+    }
 }

@@ -63,4 +63,20 @@ class BookController extends Controller
             return response()->json(['status' => 400, 'data' => []]);
         }
     }
+
+    public function getBooksBy(Request $request) {
+        $find = $this->bookService->getBooksBy($request);
+        if($find == []) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'NOT FOUND',
+                'data' => []
+            ]);
+        }
+        return response()->json([
+            'status' => 200,
+            'message' => 'SUCCESS',
+            'data' => $find
+        ]);
+    }
 }
