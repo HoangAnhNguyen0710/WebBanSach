@@ -21,5 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/book', [BookController::class, 'store']);
+Route::get('/book/{id}', [BookController::class, 'getOneBook'])->where('id', '[0-9]+');
 Route::get('/book', [BookController::class, 'getBookList']);
 ROute::post('/order', [OrderController::class, 'store']);
+Route::get('/search', [BookController::class, 'getBooksBy']);
