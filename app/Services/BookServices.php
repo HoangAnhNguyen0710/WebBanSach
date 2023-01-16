@@ -171,4 +171,10 @@ public function getListOfBooks(int $page, int $items_per_page, $filterCol, $filt
     return $this->bookRepository->getListOfBooks($page, $items_per_page);
 }
 
+public function getBooksBy(Request $request) {
+    $searchString = $request->only('q')['q'];
+    $searchPublisherID = $this->publisherRepository->getOneByName($searchString);
+    return $this->bookRepository->searchBooksBy($searchString, $searchPublisherID)->toArray();
+}
+
 }

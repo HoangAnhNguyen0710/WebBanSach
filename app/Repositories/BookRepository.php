@@ -34,7 +34,7 @@ class BookRepository extends BaseRepository
         $result = $this->model->query()->with('publisher', 'category')->where('display', 1)->find($book_id);
         return $result;
     }
-}
+
 
 
     public function getListOfBooksByFilter($page, $per_page, $filterCol, $filterValue)
@@ -59,5 +59,14 @@ class BookRepository extends BaseRepository
             ->where('display', 1)
             ->with('publisher', 'category')
             ->paginate($per_page, ['*'], 'page', $page);
+    }
+
+    public function searchBooksBy(string $search, $publisherSearchID) {
+        return $this->model->query()
+            ->where('name', 'LIKE', '%'.$search.'%')
+            ->orWhereIn('publisher_id', $publisherSearchID)
+            ->where('display', 1)
+            ->with('publisher', 'category')
+            ->get(['name', 'price', 'discount_price', 'in_stock', 'sold', 'publisher_id', 'category_id']);
     }
 }
