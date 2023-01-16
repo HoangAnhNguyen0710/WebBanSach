@@ -6,6 +6,7 @@ use App\Http\Requests\CreateOrderRequest;
 use App\Repositories\BookRepository;
 use App\Repositories\OrderDetailRepository;
 use App\Repositories\OrderRepository;
+use Illuminate\Http\Request;
 
 class OrderServices
 {
@@ -54,5 +55,14 @@ class OrderServices
             }
         }
         return $errMSG;
+    }
+
+    public function getOneOrder($order_id) {
+        $order_detail = [];
+        $order_infor =  $this->orderRepository->getOne($order_id)->toArray()[0];
+        $order_items = $this->orderDetailRepository->getItemsByOrderId($order_id)->toArray();
+        $order_detail = array_merge($order_infor, ['items' => $order_items]);
+        
+        return $order_detail;
     }
 }
