@@ -13,7 +13,7 @@ class Order_items extends Model
    *
    * @var string
    */
-  protected $table = 'orders_items';
+  protected $table = 'order_items';
   protected $fillable = [
       "order_id",
       "book_id",
@@ -24,7 +24,7 @@ class Order_items extends Model
     return $this->belongsTo(Order::class, 'order_id');
   }
 
-  public function voucher(){
+  public function book(){
     return $this->belongsTo(Book::class, 'book_id');
   }
 

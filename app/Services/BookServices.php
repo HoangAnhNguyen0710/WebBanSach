@@ -9,7 +9,9 @@ use League\Csv\Reader;
 
 class BookServices {
 
-// protected ArticleRepository $articleRepository;
+    protected $bookRepository;
+    protected $publisherRepository;
+    protected $categoryRepository;
 
 
 public function __construct()

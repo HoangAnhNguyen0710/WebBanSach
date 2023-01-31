@@ -22,8 +22,8 @@ class CreateOrdersTable extends Migration
             $table->string('customer_contact');
             $table->bigInteger('price');
             $table->bigInteger('discount_price');
-            $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('applied_voucher');
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->unsignedBigInteger('applied_voucher')->nullable();
 
             $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('applied_voucher')->references('id')->on('vouchers')->onDelete('cascade');
