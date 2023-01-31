@@ -1,47 +1,15 @@
 @extends('layouts.master')
 
 @section('title')
-    <title>Home</title>
+    <title>Tên filter và giá trị filter ở đây<!--ví dụ: NXB: NXB Trẻ--></title>
 @endsection
 
 @section('content')
-    <!--carousel slider-->
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="images/slideshow_1.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="images/slideshow_2.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="images/slideshow_3.jpg" class="d-block w-100" alt="...">
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
     <!-- Header-->
     <header class="bg-dark py-5">
         <div class="container px-4 px-lg-5">
             <div class="text-center text-white">
-                <h2 class="display-6 fw-bolder">Trang chủ</h2>
+                <h2 class="display-6 fw-bolder">Value của filter <!--ví dụ: NXB Trẻ--></h2>
                 <p class="lead fw-normal text-white-50 mb-0">Khám phá web bán sách nào!</p>
             </div>
         </div>
@@ -49,9 +17,6 @@
     <!-- Section-->
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
-            <div class="py-3">
-                <h4 class="py-3" class="text-md">Sách mới hôm nay</h4>
-            </div>
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <div class="col mb-5">
                     <div class="card h-100">
@@ -159,11 +124,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="py-3">
-                <h4 class="py-3" class="text-md">Sách bán chạy</h4>
-            </div>
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Sale badge-->
