@@ -24,7 +24,7 @@ class Order_items extends Model
     return $this->belongsTo(Order::class, 'order_id');
   }
 
-  public function voucher(){
+  public function book(){
     return $this->belongsTo(Book::class, 'book_id');
   }
 

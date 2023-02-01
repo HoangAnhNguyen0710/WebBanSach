@@ -20,14 +20,10 @@ class BookRepository extends BaseRepository
 
     public function store($data)
     {
-        try {
             foreach ($data as $row) {
-                $this->model::query()->upsert($row, 'id');
+            $this->model::query()->upsert($row, 'id');
             }
             return true;
-        } catch (\Exception $e) {
-            throw new \Exception($e);
-        }
     }
 
     public function getOne($book_id) {
