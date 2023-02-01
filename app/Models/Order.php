@@ -20,7 +20,7 @@ class Order extends Model
       "updated_at",
       "status",
       "price",
-      "price_discount",
+      "discount_price",
       "applied_voucher",
       "customer_name",
       "customer_address",
@@ -29,8 +29,8 @@ class Order extends Model
   ];
 
   protected $casts = [
-      'price' => 'long',
-      'price_discount' => 'long',
+      'price' => 'integer',
+      'discount_price' => 'integer',
   ];
 
 

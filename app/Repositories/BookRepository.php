@@ -61,6 +61,11 @@ class BookRepository extends BaseRepository
             ->paginate($per_page, ['*'], 'page', $page);
     }
 
+
+    public function getListOfIds()
+    {
+        return $this->model->query()->get('id')->toArray();
+    }
     public function searchBooksBy(string $search, $publisherSearchID) {
         return $this->model->query()
             ->where('name', 'LIKE', '%'.$search.'%')
@@ -68,5 +73,6 @@ class BookRepository extends BaseRepository
             ->where('display', 1)
             ->with('publisher', 'category')
             ->get(['name', 'price', 'discount_price', 'in_stock', 'sold', 'publisher_id', 'category_id']);
+
     }
 }
