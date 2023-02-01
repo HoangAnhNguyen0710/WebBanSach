@@ -21,8 +21,18 @@ class OrderRepository extends BaseRepository
     public function store($data)
     {
         return $this->model::query()->create($data)->toArray();
-         
     }
 
-   
+    public function getOne(int $order_id)
+    {
+        return $this->model::query()->where('id', $order_id)
+            ->with('voucher')
+            ->get(['id', 'status', 'price', 'discount_price', 'applied_voucher']);
+    }
+
+    public function updateOrderStatus(int $orderId, int $status)
+    {
+        return $this->model::query()->where('id', $orderId)
+            ->update(['status' => $status]);
+    }
 }

@@ -30,5 +30,10 @@ class OrderDetailRepository extends BaseRepository
         }       
     }
 
-   
+    public function getItemsByOrderId($order_id)
+    {
+        return $this->model::query()->with('book')
+            ->where('order_id', $order_id)
+            ->get();
+    }
 }

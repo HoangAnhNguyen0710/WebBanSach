@@ -6,8 +6,6 @@ use App\Http\Requests\CreateOrderRequest;
 use App\Services\OrderServices;
 use Illuminate\Http\Request;
 
-use function PHPUnit\Framework\isType;
-
 class OrderController extends Controller
 {
 
@@ -32,6 +30,25 @@ class OrderController extends Controller
             'status' => 200,
             'message' => 'SUCCESS',
             'data' => ['order_id' => $upload['value']]
+        ]);
+    }
+
+    public function getOneOrder($order_id)
+    {
+        $data = $this->orderService->getOneOrder($order_id);
+
+        if($data != []) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'SUCCESS',
+                'data' => $data
+            ]);
+        }
+
+        return response()->json([
+            'status' => 404,
+            'message' => 'NOT FOUND',
+            'data' => []
         ]);
     }
 }
