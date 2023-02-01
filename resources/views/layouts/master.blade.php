@@ -9,9 +9,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @stack('css')
     <link href="css/styles.css" rel="stylesheet" />
-
+</head>
 <body>
-    </head>
     @include('components.navbar')
     @yield('content')
     @include('components.footer')
