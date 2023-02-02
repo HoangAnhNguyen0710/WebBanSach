@@ -27,7 +27,7 @@ class OrderDetailRepository extends BaseRepository
             return true;
         } catch (\Exception $e) {
             throw new \Exception($e);
-        }       
+        }
     }
 
     public function getItemsByOrderId($orderId)

@@ -37,7 +37,7 @@ class OrderController extends Controller
     {
         $data = $this->orderService->getOne($order_id);
 
-        if($data != []) {
+        if ($data != []) {
             return response()->json([
                 'status' => 200,
                 'message' => 'SUCCESS',

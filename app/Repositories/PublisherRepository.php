@@ -25,6 +25,6 @@ class PublisherRepository extends BaseRepository
 
     public function getOneByName($searchName)
     {
-        return $this->model::query()->where('publisher_name', 'LIKE', '%'. $searchName . '%')->get('id')->toArray();
+        return $this->model::query()->where('publisher_name', 'LIKE', '%' . $searchName . '%')->get('id')->toArray();
     }
 }
