@@ -22,26 +22,26 @@ class OrderServices
 
     public function store(CreateOrderRequest $request)
     {
-        $list_items = [];
-        $book_id_list = $this->bookRepository->getListOfIds();
+        $itemList = [];
+        $bookIdList = $this->bookRepository->getListOfIds();
         if($request->has('order_items_list')) {
-            $list_items = $request->only('order_items_list')['order_items_list'];
-            $list_items = json_decode($list_items, true);
+            $itemList = $request->only('order_items_list')['order_items_list'];
+            $itemList = json_decode($itemList, true);
         }
-        if(($errValidateMSG = $this->validateOrderItems($list_items, $book_id_list))!= "") {
+        if(($errValidateMSG = $this->validateOrderItems($itemList, $bookIdList))!= "") {
             return ['message' => $errValidateMSG];
         }
-        $order_detail = array_merge($request->except('order_items_list'), ["status" => 1]);
-        $order_id = $this->orderRepository->store($order_detail)['id'];
+        $orderDetail = array_merge($request->except('order_items_list'), ["status" => 1]);
+        $orderId = $this->orderRepository->store($orderDetail)['id'];
 
-        foreach($list_items as $offset => $item) {
+        foreach($itemList as $offset => $item) {
             
-            $list_items[$offset]["order_id"]= $order_id;
+            $itemList[$offset]["order_id"]= $orderId;
         }
 
-        $save_to_order_items = $this->orderDetailRepository->store($list_items);
+        $save_to_order_items = $this->orderDetailRepository->store($itemList);
         if ($save_to_order_items) {
-            return ['value' => $order_id];
+            return ['value' => $orderId];
         }
         return ['message' => "Save data to order items table failed"];
     }
@@ -57,12 +57,12 @@ class OrderServices
         return $errMSG;
     }
 
-    public function getOneOrder($order_id) {
-        $order_detail = [];
-        $order_infor =  $this->orderRepository->getOne($order_id)->toArray()[0];
-        $order_items = $this->orderDetailRepository->getItemsByOrderId($order_id)->toArray();
-        $order_detail = array_merge($order_infor, ['items' => $order_items]);
+    public function getOne($orderId) {
+        $orderDetail = [];
+        $orderInfor =  $this->orderRepository->getOne($orderId)->toArray()[0];
+        $orderItems = $this->orderDetailRepository->getItemsByOrderId($orderId)->toArray();
+        $orderDetail = array_merge($orderInfor, ['items' => $orderItems]);
         
-        return $order_detail;
+        return $orderDetail;
     }
 }

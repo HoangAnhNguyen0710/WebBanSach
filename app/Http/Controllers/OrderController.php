@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-
+    protected $orderService;
     public function __construct()
     {
         $this->orderService = app(OrderServices::class);
@@ -35,7 +35,7 @@ class OrderController extends Controller
 
     public function getOneOrder($order_id)
     {
-        $data = $this->orderService->getOneOrder($order_id);
+        $data = $this->orderService->getOne($order_id);
 
         if($data != []) {
             return response()->json([

@@ -24,9 +24,9 @@ class OrderRepository extends BaseRepository
          
     }
 
-    public function getOne(int $order_id)
+    public function getOne(int $orderId)
     {
-        return $this->model::query()->where('id', $order_id)
+        return $this->model::query()->where('id', $orderId)
             ->with('voucher')
             ->get(['id', 'status', 'price', 'discount_price', 'applied_voucher']);
     }

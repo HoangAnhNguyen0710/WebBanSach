@@ -20,7 +20,7 @@ public function __construct()
     $this->publisherRepository = app(PublisherRepository::class);
     $this->categoryRepository = app(CategoryRepository::class);
 }
-public function isAValidRecord($record, $category_list, $publisher_list) {
+public function isAValidRecord($record, $categoryList, $publisherist) {
     $errorRecord = [];
 
     if(empty($record['name'])) {
@@ -71,11 +71,11 @@ public function isAValidRecord($record, $category_list, $publisher_list) {
             $errorRecord['errorMSG'] = 'missing category id!\n';
             return $errorRecord;
         }
-    if(!in_array(['id'=> $record['publisher_id']], $publisher_list)) {
+    if(!in_array(['id'=> $record['publisher_id']], $publisherist)) {
         $errorRecord['errorMSG'] = 'publisher id is not exist!\n';
         return $errorRecord;
         }
-    if(!in_array(['id'=> $record['category_id']], $category_list)) {
+    if(!in_array(['id'=> $record['category_id']], $categoryList)) {
         $errorRecord['errorMSG'] = 'category id is not exist!\n';
         return $errorRecord;
         }
@@ -102,8 +102,8 @@ public function isAValidRecord($record, $category_list, $publisher_list) {
     return true;
 }
 public function store(Request $request) {
-    $category_list = $this->publisherRepository->getAll();
-    $publisher_list = $this->categoryRepository->getAll();
+    $categoryList = $this->publisherRepository->getAll();
+    $publisherist = $this->categoryRepository->getAll();
     if($request->file('fileUpload')) {
         $fileData = Reader::createFromPath($request->file('fileUpload')->getRealPath(), 'r');
         $fileData->setHeaderOffset(0);
@@ -112,7 +112,7 @@ public function store(Request $request) {
         $offset = 0;
         foreach($dataList as $record) {
             $offset ++;
-            $checked = $this->isAValidRecord($record, $category_list, $publisher_list);
+            $checked = $this->isAValidRecord($record, $categoryList, $publisherist);
             if($checked !== true) {
                 $errMSG = "line " . $offset . ": " . $checked['errorMSG'];
                 return $errMSG;
@@ -140,7 +140,7 @@ public function store(Request $request) {
         'publisher_id',
         'category_id'
     ]), []);
-    $checked = $this->isAValidRecord($requestData,  $category_list, $publisher_list);
+    $checked = $this->isAValidRecord($requestData,  $categoryList, $publisherist);
         if($checked !== true) {
                 $errMSG = $checked['errorMSG'];
                 return $errMSG;
@@ -161,16 +161,16 @@ public function getDataFromCSV($fileRecords)
     return $dataList;
 }
 
-public function getOneBook($book_id) {
-    return $this->bookRepository->getOne($book_id);
+public function getOne($bookId) {
+    return $this->bookRepository->getOne($bookId);
 }
 
-public function getListOfBooks(int $page, int $items_per_page, $filterCol, $filterValue = null) {
+public function getListOfBooks(int $page, int $itemsPerPage, $filterCol, $filterValue = null) {
 
     if($filterCol != null) {
-        return $this->bookRepository->getListOfBooksByFilter($page,  $items_per_page, $filterCol, $filterValue);
+        return $this->bookRepository->getListOfBooksByFilter($page,  $itemsPerPage, $filterCol, $filterValue);
     }
-    return $this->bookRepository->getListOfBooks($page, $items_per_page);
+    return $this->bookRepository->getListOfBooks($page, $itemsPerPage);
 }
 
 public function getBooksBy(Request $request) {
