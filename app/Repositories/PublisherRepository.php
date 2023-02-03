@@ -20,11 +20,11 @@ class PublisherRepository extends BaseRepository
 
     public function getAll()
     {
-        return $this->model::query()->get('id')->toArray();
+        return $this->model::query()->get('id');
     }
 
     public function getOneByName($search)
     {
-        return $this->model::query()->where('publisher_name', 'LIKE', '%'. $search . '%')->get('id')->toArray();
+        return $this->model::query()->where('publisher_name', 'LIKE', '%'. $search . '%')->get('id');
     }
 }

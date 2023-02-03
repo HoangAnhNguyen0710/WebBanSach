@@ -22,7 +22,6 @@ public function __construct()
 }
 public function isAValidRecord($record, $category_list, $publisher_list) {
     $errorRecord = [];
-
     if(empty($record['name'])) {
             $errorRecord['errorMSG'] = 'missing book name!\n';
             return $errorRecord;
@@ -102,8 +101,8 @@ public function isAValidRecord($record, $category_list, $publisher_list) {
     return true;
 }
 public function store(Request $request) {
-    $category_list = $this->publisherRepository->getAll();
-    $publisher_list = $this->categoryRepository->getAll();
+    $publisher_list = $this->publisherRepository->getAll()->toArray();
+    $category_list = $this->categoryRepository->getAll()->toArray();
     if($request->file('fileUpload')) {
         $fileData = Reader::createFromPath($request->file('fileUpload')->getRealPath(), 'r');
         $fileData->setHeaderOffset(0);
@@ -165,17 +164,17 @@ public function getOneBook($book_id) {
     return $this->bookRepository->getOne($book_id);
 }
 
-public function getListOfBooks(int $page, int $items_per_page, $filterCol, $filterValue = null) {
+public function getListOfBooks(int $page, int $items_per_page, $filterCol, $filterValue = null, $sortCol = 'updated_at', $sortValue = 'desc') {
 
     if($filterCol != null) {
-        return $this->bookRepository->getListOfBooksByFilter($page,  $items_per_page, $filterCol, $filterValue);
+        return $this->bookRepository->getListOfBooksByFilter($page,  $items_per_page, $filterCol, $filterValue, $sortCol, $sortValue);
     }
-    return $this->bookRepository->getListOfBooks($page, $items_per_page);
+    return $this->bookRepository->getListOfBooks($page, $items_per_page, $sortCol, $sortValue);
 }
 
 public function getBooksBy(Request $request) {
     $searchString = $request->only('q')['q'];
-    $searchPublisherID = $this->publisherRepository->getOneByName($searchString);
+    $searchPublisherID = $this->publisherRepository->getOneByName($searchString)->toArray();
     return $this->bookRepository->searchBooksBy($searchString, $searchPublisherID)->toArray();
 }
 

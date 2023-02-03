@@ -18,8 +18,13 @@ class CategoryRepository extends BaseRepository
         return Category::class;
     }
 
+    public function getAllWithColumnList($colList)
+    {
+        return $this->model::query()->get($colList);
+    }
+
     public function getAll()
     {
-        return $this->model::query()->get('id')->toArray();
+        return $this->model::query()->get('id');
     }
 }

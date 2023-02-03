@@ -53,8 +53,20 @@ class BookController extends Controller
             $filterCol = null;
         }
 
+        $sortCol = $request->has('sort_col');
+        $sortValue = $request->has('sort_value');
+
+        if ($sortCol && $sortValue) {
+            $sortCol = $params['sort_col'];
+
+            $sortValue = $params['sort_value'];
+        } else {
+            $sortCol = 'updated_at';
+            $sortValue = 'desc';
+        }
+
         try {
-            $list = $this->bookService->getListOfBooks($pageNum, $itemsPerPage, $filterCol, $filterValue);
+            $list = $this->bookService->getListOfBooks($pageNum, $itemsPerPage, $filterCol, $filterValue, $sortCol, $sortValue);
 
             return response()->json(['status' => 200, 'data' => $list]);
         } catch (\Exception $e) {
