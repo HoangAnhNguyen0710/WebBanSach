@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,4 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/bookDetail', function () {
-    return view('bookDetail');
-});
+Route::get('/books/{id}', [BookController::class, 'getOneBook'])->where('id', '[0-9]+');

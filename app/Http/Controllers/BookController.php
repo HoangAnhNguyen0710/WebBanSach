@@ -64,22 +64,13 @@ class BookController extends Controller
         }
     }
 
-    public function getOneBook($book_id) {
-        $book = $this->bookService->getOneBook($book_id);
+    public function getOneBook($id) {
+        $book = $this->bookService->getOneBook($id);
         if($book) {
-            // tạm thời trả ở đây trả về kết quả dạng json, về sau sẽ được thay thế thành trả về view và data
-            return response()->json([
-                'status' => 200,
-                'message' => 'SUCCESS',
-                'data' => $book->toArray()
-            ]);
+            return view('bookDetail', compact('book'));
         }
-        else return response()->json([
-            'status' => 404,
-            'message' => 'THE BOOK WITH ID:'.$book_id.' IS NOT EXIST IN THE DATABASE',
-            'data' => []
-        ]);
-        return $book;
+        $message = 'THE BOOK WITH ID:' . $id . ' IS NOT EXIST';
+        return view('bookDetail', compact('message'));
     }
 
     public function getBooksBy(Request $request) {

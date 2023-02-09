@@ -26,12 +26,12 @@ class BookRepository extends BaseRepository
         return true;
     }
 
-    public function getOne($book_id)
-    {
+
+    public function getOne(int $book_id) {
+
         $result = $this->model->query()->with('publisher', 'category')->where('display', 1)->find($book_id);
         return $result;
     }
-
 
 
     public function getListOfBooksByFilter($page, $per_page, $filterCol, $filterValue)
