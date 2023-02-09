@@ -76,18 +76,94 @@ class BookController extends Controller
         }
     }
 
-    public function getOneBook($id) {
+    public function getOneBook($id)
+    {
         $book = $this->bookService->getOneBook($id);
-        if($book) {
+        if ($book) {
             return view('bookDetail', compact('book'));
         }
         $message = 'THE BOOK WITH ID:' . $id . ' IS NOT EXIST';
         return view('bookDetail', compact('message'));
     }
 
-    public function getBooksBy(Request $request) {
+    public function addToCart($id)
+    {
+        $book = $this->bookService->getOneBook($id);
+        if (!$book) {
+            abort(404);
+        } else {
+            $cart = session()->get('cart');
+            if (!$cart) {
+                //this part of function, get product that chsen by user or request
+                $cart[$id] = [
+                    "name" => $book['name'],
+                    "quantity" => 1,
+                    "price" => $book['price'],
+                    "discount_price" => $book['discount_price']
+                ];
+                session()->put('cart', $cart);
+
+                return redirect()->back()->with('success', 'Book added to cart successfully!');
+            }
+
+            if (isset($cart[$id])) {
+                $cart[$id]['quantity']++;
+
+                session()->put('cart', $cart);
+
+                return redirect()->back()->with('success', 'Book added to cart successfully!');
+            }
+
+            // if item not exist in cart then add to cart with quantity = 1
+            $cart[$id] = [
+                "name" => $book['name'],
+                "quantity" => 1,
+                "price" => $book['price'],
+                "discount_price" => $book['discount_price']
+            ];
+
+            session()->put('cart', $cart); // this code put product of choose in cart
+
+            return redirect()->back()->with('success', 'Product added to cart successfully!');
+        }
+    }
+
+    public function updateCart(Request $request)
+    {
+        if ($request->id and $request->quantity) {
+            $cart = session()->get('cart');
+
+            $cart[$request->id]["quantity"] = $request->quantity;
+
+            session()->put('cart', $cart);
+
+            session()->flash('success', 'Cart updated successfully');
+        }
+    }
+
+
+    // delete or remove product of choose in cart
+    public function removeCart(Request $request)
+    {
+        if ($request->id) {
+
+            $cart = session()->get('cart');
+
+            if (isset($cart[$request->id])) {
+
+                unset($cart[$request->id]);
+
+                session()->put('cart', $cart);
+            }
+
+            session()->flash('success', 'Product removed successfully');
+        }
+    }
+
+    public function getBooksBy(Request $request)
+    {
         $find = $this->bookService->getBooksBy($request);
-        if($find == []) {
+        if ($find == []) {
             return response()->json([
                 'status' => 404,
                 'message' => 'NOT FOUND',

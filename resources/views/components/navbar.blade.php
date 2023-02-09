@@ -29,13 +29,14 @@
                 </div>
             </form>
             <form class="d-flex">
-                <button class="btn btn-outline-dark" type="submit">
+                <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
-                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">{{count(session('cart'))}}</span>
                 </button>
             </form>
         </div>
+        @extends('components.cart')
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>

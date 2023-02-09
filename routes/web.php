@@ -18,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/books/{id}', [BookController::class, 'getOneBook'])->where('id', '[0-9]+');
+Route::get('/add-to-cart/{id}', [BookController::class, 'addToCart'])->where('id', '[0-9]+');
+Route::patch('/update-cart', [BookController::class, 'updateCart']);
+Route::delete('/remove-from-cart', [BookController::class, 'removeCart']);
