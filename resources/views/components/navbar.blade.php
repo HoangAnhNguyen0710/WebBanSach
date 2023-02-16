@@ -1,10 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#!">Web bán sách</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
-                class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <button class="navbar-toggler" type="button"><span
+                class="navbar-toggler-icon" onclick=changeVisibility()></span></button>
+        <div class="navbar-collapse collapse" id="navbarSupportedContent">
             <ul class="nav navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Trang chủ</a></li>
                 <li class="nav-item"><a class="nav-link" href="/">Sách bán chạy</a></li>
@@ -38,4 +37,13 @@
             </form>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        function changeVisibility() {
+            if(!$("#navbarSupportedContent").hasClass('show')) {
+                $("#navbarSupportedContent").addClass("show")
+            }
+            else $("#navbarSupportedContent").removeClass("show")
+        }
+    </script>
 </nav>
