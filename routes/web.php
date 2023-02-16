@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index']);
-
 Route::get('/payment', [OrderController::class, 'createOrder']);
 Route::get('/books/{id}', [BookController::class, 'getOneBook'])->where('id', '[0-9]+');
 Route::get('/add-to-cart/{id}', [BookController::class, 'addToCart'])->where('id', '[0-9]+');
