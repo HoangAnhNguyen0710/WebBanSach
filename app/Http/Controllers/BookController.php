@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateBookRequest;
 use App\Http\Requests\GetBookListRequest;
 use App\Services\BookServices;
 use Illuminate\Http\Request;
@@ -9,12 +10,13 @@ use Illuminate\Http\Request;
 class BookController extends Controller
 {
     //
+    protected $bookService;
     public function __construct()
     {
         $this->bookService = app(BookServices::class);
     }
 
-    public function store(Request $request)
+    public function store(CreateBookRequest $request)
     {
         $upload = $this->bookService->store($request);
 
@@ -76,18 +78,20 @@ class BookController extends Controller
         }
     }
 
-    public function getOneBook($id) {
-        $book = $this->bookService->getOneBook($id);
-        if($book) {
+    public function getOneBook($id)
+    {
+        $book = $this->bookService->getOne($id);
+        if ($book) {
             return view('bookDetail', compact('book'));
         }
         $message = 'THE BOOK WITH ID:' . $id . ' IS NOT EXIST';
         return view('bookDetail', compact('message'));
     }
 
-    public function getBooksBy(Request $request) {
+    public function getBooksBy(Request $request)
+    {
         $find = $this->bookService->getBooksBy($request);
-        if($find == []) {
+        if ($find == []) {
             return response()->json([
                 'status' => 404,
                 'message' => 'NOT FOUND',
