@@ -95,8 +95,8 @@ class BookController extends Controller
             $cart = session()->get('cart');
             if (!$cart) {
                 //this part of function, get product that chsen by user or request
-                $cart[$id] = [
-                    "name" => $book['name'],
+                $cart[$book['name']] = [
+                    "book_id" => $book['id'],
                     "quantity" => 1,
                     "price" => $book['price'],
                     "discount_price" => $book['discount_price']
@@ -115,8 +115,8 @@ class BookController extends Controller
             }
 
             // if item not exist in cart then add to cart with quantity = 1
-            $cart[$id] = [
-                "name" => $book['name'],
+            $cart[$book['name']] = [
+                "book_id" => $book['id'],
                 "quantity" => 1,
                 "price" => $book['price'],
                 "discount_price" => $book['discount_price']
@@ -132,9 +132,7 @@ class BookController extends Controller
     {
         if ($request->id and $request->quantity) {
             $cart = session()->get('cart');
-
-            $cart[$request->id]["quantity"] = $request->quantity;
-
+            $cart[$request->id]["quantity"] = (int)$request->quantity;
             session()->put('cart', $cart);
 
             session()->flash('success', 'Cart updated successfully');
