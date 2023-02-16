@@ -84,8 +84,8 @@
                                 <!-- Product price-->
                                 <span class="fs-4">
                                     <span class="text-muted text-decoration-line-through mb-3">
-                                        $20.00</span>
-                                    <b class="fw-bold"> $18.00</b>
+                                        {{$book['price']}}đ</span>
+                                    <b class="fw-bold"> {{$book['discount_price']}}đ</b>
                                 </span>
                                 <a class="btn btn-outline-danger mt-auto" href="#">Thêm vào giỏ hàng</a>
                             </div>
