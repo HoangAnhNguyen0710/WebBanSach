@@ -27,13 +27,13 @@ class OrderDetailRepository extends BaseRepository
             return true;
         } catch (\Exception $e) {
             throw new \Exception($e);
-        }       
+        }
     }
 
-    public function getItemsByOrderId($order_id)
+    public function getItemsByOrderId($orderId)
     {
         return $this->model::query()->with('book')
-            ->where('order_id', $order_id)
+            ->where('order_id', $orderId)
             ->get();
     }
 }

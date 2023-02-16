@@ -26,15 +26,15 @@ class BookRepository extends BaseRepository
         return true;
     }
 
+
+
     public function getOne(int $book_id)
     {
         $result = $this->model->query()->with('publisher', 'category')->where('display', 1)->find($book_id);
         return $result;
     }
 
-
-
-    public function getListOfBooksByFilter($page, $per_page, $filterCol, $filterValue, $sortCol = 'updated_at', $sortValue = 'desc')
+    public function getListOfBooksByFilter($page, $itemsPerPage, $filterCol, $filterValue)
     {
 
         if ((int)$filterValue > 0) {
@@ -47,17 +47,16 @@ class BookRepository extends BaseRepository
             ->where($filterCol, $filterValue)
             ->orderBy($sortCol, $sortValue)
             ->with('publisher', 'category')
-            ->paginate($per_page, ['*'], 'page', $page);
+            ->paginate($itemsPerPage, ['*'], 'page', $page);
     }
 
-
-    public function getListOfBooks($page, $per_page = null, $sortCol = 'updated_at', $sortValue = 'desc')
+    public function getListOfBooks($page, $itemsPerPage = null)
     {
         return $this->model->query()->select(['id', 'publisher_id', 'category_id', 'name', 'sold', 'price', 'discount_price', 'updated_at'])
             ->orderBy($sortCol, $sortValue)
             ->where('display', 1)
             ->with('publisher', 'category')
-            ->paginate($per_page, ['*'], 'page', $page);
+            ->paginate($itemsPerPage, ['*'], 'page', $page);
     }
 
 
@@ -73,5 +72,20 @@ class BookRepository extends BaseRepository
             ->where('display', 1)
             ->with('publisher', 'category')
             ->get(['name', 'price', 'discount_price', 'in_stock', 'sold', 'publisher_id', 'category_id']);
+    }
+
+    public function updateBookQuantity($book)
+    {
+        $beforeUpdate = $this->model->query()->where('id', $book['book_id'])->get(['in_stock', 'sold'])->toArray();
+        $bookQuantity = $beforeUpdate[0];
+        if ($bookQuantity != []) {
+            $newInStock = $bookQuantity['in_stock'] - $book['quantity'];
+            if ($newInStock < 0) {
+                return false;
+            }
+            $newSold = $bookQuantity['sold'] + $book['quantity'];
+            $this->model->query()->where('id', $book['book_id'])->update(['in_stock' => $newInStock, 'sold' => $newSold]);
+            return true;
+        }
     }
 }
