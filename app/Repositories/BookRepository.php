@@ -27,14 +27,15 @@ class BookRepository extends BaseRepository
     }
 
 
-    public function getOne(int $book_id) {
+    public function getOne(int $book_id)
+    {
 
         $result = $this->model->query()->with('publisher', 'category')->where('display', 1)->find($book_id);
         return $result;
     }
 
 
-    public function getListOfBooksByFilter($page, $per_page, $filterCol, $filterValue)
+    public function getListOfBooksByFilter($page, $itemsPerPage, $filterCol, $filterValue)
     {
 
         if ((int)$filterValue > 0) {
@@ -46,16 +47,16 @@ class BookRepository extends BaseRepository
             ->where($filterCol, $filterValue)
             ->orderBy('updated_at', 'asc')
             ->with('publisher', 'category')
-            ->paginate($per_page, ['*'], 'page', $page);
+            ->paginate($itemsPerPage, ['*'], 'page', $page);
     }
 
 
-    public function getListOfBooks($page, $per_page = null)
+    public function getListOfBooks($page, $itemsPerPage = null)
     {
         return $this->model->orderBy('updated_at', 'asc')
             ->where('display', 1)
             ->with('publisher', 'category')
-            ->paginate($per_page, ['*'], 'page', $page);
+            ->paginate($itemsPerPage, ['*'], 'page', $page);
     }
 
 
