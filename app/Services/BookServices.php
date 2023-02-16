@@ -25,7 +25,6 @@ class BookServices
     public function isAValidRecord($record, $categoryList, $publisherist)
     {
         $errorRecord = [];
-
         if (empty($record['name'])) {
             $errorRecord['errorMSG'] = 'missing book name!\n';
             return $errorRecord;
@@ -166,20 +165,17 @@ class BookServices
     {
         return $this->bookRepository->getOne($bookId);
     }
+public function getListOfBooks(int $page, int $items_per_page, $filterCol, $filterValue = null, $sortCol = 'updated_at', $sortValue = 'desc') {
 
-    public function getListOfBooks(int $page, int $itemsPerPage, $filterCol, $filterValue = null)
-    {
-
-        if ($filterCol != null) {
-            return $this->bookRepository->getListOfBooksByFilter($page,  $itemsPerPage, $filterCol, $filterValue);
-        }
-        return $this->bookRepository->getListOfBooks($page, $itemsPerPage);
+    if($filterCol != null) {
+        return $this->bookRepository->getListOfBooksByFilter($page,  $items_per_page, $filterCol, $filterValue, $sortCol, $sortValue);
     }
+    return $this->bookRepository->getListOfBooks($page, $items_per_page, $sortCol, $sortValue);
+}
 
-    public function getBooksBy(Request $request)
-    {
-        $searchString = $request->only('q')['q'];
-        $searchPublisherID = $this->publisherRepository->getOneByName($searchString);
-        return $this->bookRepository->searchBooksBy($searchString, $searchPublisherID)->toArray();
-    }
+public function getBooksBy(Request $request) {
+    $searchString = $request->only('q')['q'];
+    $searchPublisherID = $this->publisherRepository->getOneByName($searchString)->toArray();
+    return $this->bookRepository->searchBooksBy($searchString, $searchPublisherID)->toArray();
+}
 }

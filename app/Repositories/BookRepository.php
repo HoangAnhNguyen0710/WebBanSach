@@ -26,15 +26,14 @@ class BookRepository extends BaseRepository
         return true;
     }
 
-
-
     public function getOne(int $book_id)
     {
         $result = $this->model->query()->with('publisher', 'category')->where('display', 1)->find($book_id);
         return $result;
     }
 
-    public function getListOfBooksByFilter($page, $itemsPerPage, $filterCol, $filterValue)
+
+    public function getListOfBooksByFilter($page, $itemsPerPage, $filterCol, $filterValue, $sortCol = 'updated_at', $sortValue = 'desc')
     {
 
         if ((int)$filterValue > 0) {
@@ -50,7 +49,7 @@ class BookRepository extends BaseRepository
             ->paginate($itemsPerPage, ['*'], 'page', $page);
     }
 
-    public function getListOfBooks($page, $itemsPerPage = null)
+    public function getListOfBooks($page, $itemsPerPage = null, $sortCol = 'updated_at', $sortValue = 'desc')
     {
         return $this->model->query()->select(['id', 'publisher_id', 'category_id', 'name', 'sold', 'price', 'discount_price', 'updated_at'])
             ->orderBy($sortCol, $sortValue)
@@ -72,6 +71,7 @@ class BookRepository extends BaseRepository
             ->where('display', 1)
             ->with('publisher', 'category')
             ->get(['name', 'price', 'discount_price', 'in_stock', 'sold', 'publisher_id', 'category_id']);
+
     }
 
     public function updateBookQuantity($book)

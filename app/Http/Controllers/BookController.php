@@ -80,7 +80,8 @@ class BookController extends Controller
 
     public function getOneBook($id)
     {
-        $book = $this->bookService->getOne($id);
+
+        $book = $this->bookService->getOneBook($id);
         if ($book) {
             return view('bookDetail', compact('book'));
         }
