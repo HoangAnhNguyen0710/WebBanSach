@@ -161,7 +161,7 @@ class BookServices
         return $dataList;
     }
 
-    public function getOne($bookId)
+    public function getOneBook($bookId)
     {
         return $this->bookRepository->getOne($bookId);
     }

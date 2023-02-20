@@ -26,6 +26,6 @@ class HomeController extends Controller
             $bookByCategory[$offset]['list'] = $this->bookService->getListOfBooks(1, 2, 'category_id' , $bookByCategory[$offset]['id'])->toArray()['data'];
         }
 
-        return view('home', compact('recentBook', 'bestSellerBook', 'bookByCategory'));
+        return view('home', compact('recentBook', 'bestSellerBook', 'bookByCategory', 'categoryList'));
     }
 }

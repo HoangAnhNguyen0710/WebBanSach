@@ -1,8 +1,8 @@
 <?php $total = 0; ?>
 <!-- by this code session get all product that user chose -->
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasTopLabel">
+<div class="offcanvas offcanvas-end"  id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="z-index: 1530">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasTopLabel">Giỏ hàng</h5>
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Giỏ hàng</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
@@ -50,8 +50,14 @@
                 <div class="row">
                     <div class="col"><a href="{{ url('/') }}" class="btn btn-warning w-100"><i
                                 class="fa fa-angle-left"></i> Continue Shopping</a></div>
+                    @if($total > 0)
                     <div class="col"><a href="{{ url('/payment') }}" class="btn btn-success w-100"><i
                                 class="fa fa-angle-left"></i> Checkout </a></div>
+                    @else
+                    <div class="col"><button type="button" class="btn btn-success w-100" data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-title="Bạn không thể thanh toán khi chưa có mặt hàng nào trong giỏ" disabled><i
+                        class="fa fa-angle-left"></i> Checkout </button></div>
+                    @endif
                 </div>
             </div>
 

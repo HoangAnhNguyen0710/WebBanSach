@@ -68,14 +68,6 @@
                                     <i class="bi bi-bookmark-star-fill"></i>
                                     {{$book['description']}}
                                 </div>
-                                <!-- Product reviews-->
-                                {{-- <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div> --}}
                             </div>
                         </div>
                         <!-- Product actions-->
@@ -87,7 +79,7 @@
                                         {{$book['price']}}đ</span>
                                     <b class="fw-bold"> {{$book['discount_price']}}đ</b>
                                 </span>
-                                <a class="btn btn-outline-danger mt-auto" href="#">Thêm vào giỏ hàng</a>
+                                <a class="btn btn-outline-danger mt-auto" href="{{ url('add-to-cart/'.$book['id']) }}">Thêm vào giỏ hàng</a>
                             </div>
                         </div>
                     </div>

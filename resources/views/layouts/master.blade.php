@@ -10,13 +10,14 @@
     @stack('css')
     <link href="css/styles.css" rel="stylesheet" />
 </head>
-<body>
+<body style="overflow: unset!important">
     @include('components.navbar')
     @yield('content')
     @include('components.footer')
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         // this function is for update card
                 $(".update-cart").click(function (e) {
