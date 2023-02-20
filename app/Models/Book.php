@@ -35,13 +35,15 @@ class Book extends Model
     ];
 
     protected $casts = [
-        'price' => 'long',
-        'discount_price' => 'long',
         'display' => 'boolean',
         'sold' => 'integer',
         'number_of_copies' => 'integer',
         'pages' => 'integer',
         'in_stock' => 'integer'
+    ];
+
+    protected $attributes = [
+        'display' => false
     ];
 
     public function category(){

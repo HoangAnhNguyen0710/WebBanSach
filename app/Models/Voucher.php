@@ -29,7 +29,7 @@ class Voucher extends Model
     protected $casts = [
         'expired_at' => 'datetime',
         'valid_at' => 'datetime',
-        'condition' => 'long',
+        'condition' => 'integer',
     ];
 
 
