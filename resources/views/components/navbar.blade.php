@@ -12,7 +12,7 @@
                         data-bs-toggle="dropdown" aria-expanded="false">Danh mục</button>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @foreach($categoryList as $category)
-                        <li><a class="dropdown-item" href="#!">{{$category['category_name']}}</a></li>
+                        <li><a class="dropdown-item" href="/filter?filterCol=category_id&filterValue={{$category['id']}}">{{$category['category_name']}}</a></li>
                         @endforeach
                         {{-- <li>
                             <hr class="dropdown-divider" />
@@ -35,9 +35,9 @@
                                 data-bs-toggle="dropdown" aria-expanded="false">Hi {{auth()->user()->name}}</button>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @if (auth()->user()->role == 'admin')
-                                <li><a class="dropdown-item" href="{{ route('admin-page') }}">Trang admin</a></li>
+                                <li><a class="dropdown-item" href="{{ route('adminPage') }}">Trang admin</a></li>
                                 @endif
-                                
+                                <li><a class="dropdown-item" href="{{ route('orderList') }}">Đơn hàng đã đặt</a></li>
                                 <li>
                                     <hr class="dropdown-divider" />
                                 </li>

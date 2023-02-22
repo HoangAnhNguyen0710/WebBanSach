@@ -20,4 +20,8 @@ class CategoryServices
     public function getAllWithColumnList($colList) {
         return $this->categoryRepository->getAllWithColumnList($colList)->toArray();
     }
+
+    public function getCategoryName($id) {
+        return $this->categoryRepository->getCategoryName($id)->toArray()["category_name"];
+    }
 }

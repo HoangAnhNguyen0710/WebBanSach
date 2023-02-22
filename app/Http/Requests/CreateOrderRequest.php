@@ -29,10 +29,6 @@ class CreateOrderRequest extends FormRequest
                 'required',
                 'max:255',
             ],
-            'customer_id' => [
-                'max:30',
-                Rule::exists('users', 'id')
-            ],
             'customer_address' => [
                 'required',
                 'max:255',

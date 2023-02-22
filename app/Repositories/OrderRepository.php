@@ -35,4 +35,9 @@ class OrderRepository extends BaseRepository
         return $this->model::query()->where('id', $orderId)
             ->update(['status' => $status]);
     }
+
+    public function getOrderByCustomerId($customerId)
+    {
+        return $this->model::query()->where('customer_id', $customerId)->get();
+    }
 }

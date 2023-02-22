@@ -26,9 +26,10 @@
                             </div>
                         </div>
                         <div class="col-2">{{ $details['price'] }}đ</div>
-                        <div class="col-3 val">
+                        <div class="col-3">
+                            <input type="number" value="{{ $details['quantity'] }}"
                             <?php $bookClassName = str_replace(" ","",$bookName)?>
-                            <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity" id="{{trim($bookClassName)}}">
+                               class="form-control quantity {{$bookClassName}}">
                         </div>
                         <div class="col-3 d-flex justify-content-between">
                             <div>{{ $details['price'] * $details['quantity'] }}đ</div>

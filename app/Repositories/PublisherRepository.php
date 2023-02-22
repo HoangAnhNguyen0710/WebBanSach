@@ -27,4 +27,7 @@ class PublisherRepository extends BaseRepository
     {
         return $this->model::query()->where('publisher_name', 'LIKE', '%' . $searchName . '%')->get('id')->toArray();
     }
+    public function getPublisherName($id) {
+        return $this->model::query()->where('id', $id)->first('publisher_name');
+    }
 }
