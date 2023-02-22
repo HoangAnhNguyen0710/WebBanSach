@@ -14,9 +14,6 @@ class OrderController extends Controller
         $this->orderService = app(OrderServices::class);
     }
 
-    public function createOrder() {
-       return view('createOrder');
-    }
     public function store(CreateOrderRequest $request)
     {
         $upload = $this->orderService->store($request);
@@ -28,7 +25,7 @@ class OrderController extends Controller
                 'data' => []
             ]);
         }
-
+        session()->forget('cart');
         return response()->json([
             'status' => 200,
             'message' => 'SUCCESS',

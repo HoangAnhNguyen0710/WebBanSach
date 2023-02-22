@@ -35,7 +35,6 @@ class BookRepository extends BaseRepository
 
     public function getListOfBooksByFilter($page, $itemsPerPage, $filterCol, $filterValue, $sortCol = 'updated_at', $sortValue = 'desc')
     {
-
         if ((int)$filterValue > 0) {
             $filterValue = (int)$filterValue;
         }
@@ -43,7 +42,6 @@ class BookRepository extends BaseRepository
         return $this->model->query()->select(['id', 'publisher_id', 'category_id', 'name', 'sold', 'price', 'discount_price', 'updated_at'])
             ->where($filterCol, $filterValue)
             ->where('display', 1)
-            ->where($filterCol, $filterValue)
             ->orderBy($sortCol, $sortValue)
             ->with('publisher', 'category')
             ->paginate($itemsPerPage, ['*'], 'page', $page);

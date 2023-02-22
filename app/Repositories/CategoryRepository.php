@@ -27,4 +27,8 @@ class CategoryRepository extends BaseRepository
     {
         return $this->model::query()->get('id');
     }
+
+    public function getCategoryName($id) {
+        return $this->model::query()->where('id', $id)->first('category_name');
+    }
 }
