@@ -14,6 +14,9 @@ class OrderController extends Controller
         $this->orderService = app(OrderServices::class);
     }
 
+    public function createOrder() {
+       return view('createOrder');
+    }
     public function store(CreateOrderRequest $request)
     {
         $upload = $this->orderService->store($request);

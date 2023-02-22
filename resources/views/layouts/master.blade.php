@@ -25,7 +25,7 @@
                     $.ajax({
                        url: '{{ url('update-cart') }}',
                        method: "PATCH",
-                       data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parents("div").find(".quantity").val()},
+                       data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parents("div").find("." + ele.attr("data-id").replace(/\s+/g, '')).val()},
                        success: function (response) {
                            window.location.reload();
                        }

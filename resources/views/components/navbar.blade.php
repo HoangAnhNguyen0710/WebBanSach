@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#!">Web bán sách</a>
+        <a class="navbar-brand" href="/">Web bán sách</a>
         <button class="navbar-toggler" type="button"><span
                 class="navbar-toggler-icon" onclick=changeVisibility()></span></button>
         <div class="navbar-collapse collapse" id="navbarSupportedContent">
@@ -32,7 +32,7 @@
                 <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
-                    <span class="badge bg-dark text-white ms-1 rounded-pill">{{count(session('cart'))}}</span>
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">{{count(is_countable(session('cart'))?session('cart'):[])}}</span>
                 </button>
             </form>
         </div>

@@ -178,12 +178,4 @@ public function getBooksBy(Request $request) {
     $searchPublisherID = $this->publisherRepository->getOneByName($searchString)->toArray();
     return $this->bookRepository->searchBooksBy($searchString, $searchPublisherID)->toArray();
 }
-
-
-    public function getBooksBy(Request $request)
-    {
-        $searchString = $request->only('q')['q'];
-        $searchPublisherID = $this->publisherRepository->getOneByName($searchString);
-        return $this->bookRepository->searchBooksBy($searchString, $searchPublisherID)->toArray();
-    }
 }

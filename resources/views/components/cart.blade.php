@@ -14,7 +14,7 @@
                 <div class="col-3 fw-bolder fs-6">Subtotal</div>
             </div>
             @if (session('cart'))
-                @foreach (session('cart') as $id => $details)
+                @foreach (session('cart') as $bookName => $details)
                     <?php $total += $details['price'] * $details['quantity']; ?>
                     <div class="row">
                         <div class="d-flex flex-column col-4">
@@ -22,18 +22,21 @@
                                     class="img-responsive" /></div>
                             <div class="">
                                 {{-- <h6 class="m-0">Product 1</h6> --}}
-                                <h6 class="overflow-hidden   ">{{$details['name']}}</h6>
+                                <h6 class="overflow-hidden   ">{{ $bookName }}</h6>
                             </div>
                         </div>
-                        <div class="col-2">{{$details['price']}}đ</div>
-                        <div class="col-3">
-                            <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity">
+                        <div class="col-2">{{ $details['price'] }}đ</div>
+                        <div class="col-3 val">
+                            <?php $bookClassName = str_replace(" ","",$bookName)?>
+                            <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity" id="{{trim($bookClassName)}}">
                         </div>
                         <div class="col-3 d-flex justify-content-between">
                             <div>{{ $details['price'] * $details['quantity'] }}đ</div>
                             <div class="d-flex flex-column">
-                                <button class="btn btn-info btn-sm mb-1 update-cart" data-id="{{ $id }}"><i class="bi bi-arrow-clockwise"></i></button>
-                                <button class="btn btn-danger btn-sm mb-1 remove-from-cart delete" data-id="{{ $id }}"><i class="bi bi-trash"></i></button>
+                                <button class="btn btn-info btn-sm mb-1 update-cart" data-id="{{ $bookName }}"><i
+                                        class="bi bi-arrow-clockwise"></i></button>
+                                <button class="btn btn-danger btn-sm mb-1 remove-from-cart delete"
+                                    data-id="{{ $bookName }}"><i class="bi bi-trash"></i></button>
                             </div>
                         </div>
                     </div>
@@ -42,7 +45,7 @@
             @endif
             <div>
                 <div class="visible-xs text-end py-2">
-                    <span class="fw-bolder"><strong>Total {{$total}}đ</strong></span>
+                    <span class="fw-bolder"><strong>Total {{ $total }}đ</strong></span>
                 </div>
                 <div class="row">
                     <div class="col"><a href="{{ url('/') }}" class="btn btn-warning w-100"><i
