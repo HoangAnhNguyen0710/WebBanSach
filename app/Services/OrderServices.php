@@ -76,4 +76,13 @@ class OrderServices
 
         return $orderDetail;
     }
+
+    public function getOrderByUser($customerId)
+    {
+        $orderList =  $this->orderRepository->getOrderByCustomerId($customerId)->toArray();
+        foreach ($orderList as $offset => $order) {
+            $orderList[$offset]["items"] = $this->orderDetailRepository->getItemsByOrderId($orderList[$offset]['id'])->toArray();
+        }
+        return $orderList;
+    }
 }

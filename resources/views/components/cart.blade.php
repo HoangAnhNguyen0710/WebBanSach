@@ -26,9 +26,10 @@
                             </div>
                         </div>
                         <div class="col-2">{{ $details['price'] }}đ</div>
-                        <div class="col-3 val">
+                        <div class="col-3">
+                            <input type="number" value="{{ $details['quantity'] }}"
                             <?php $bookClassName = str_replace(" ","",$bookName)?>
-                            <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity" id="{{trim($bookClassName)}}">
+                               class="form-control quantity {{$bookClassName}}">
                         </div>
                         <div class="col-3 d-flex justify-content-between">
                             <div>{{ $details['price'] * $details['quantity'] }}đ</div>
@@ -48,7 +49,7 @@
                     <span class="fw-bolder"><strong>Total {{ $total }}đ</strong></span>
                 </div>
                 <div class="row">
-                    <div class="col"><a href="{{ url('/') }}" class="btn btn-warning w-100"><i
+                    <div class="col"><a href="{{ url('/') }}" class="btn btn-warning w-100" data-bs-dismiss="offcanvas" aria-label="Close"><i
                                 class="fa fa-angle-left"></i> Continue Shopping</a></div>
                     @if($total > 0)
                     <div class="col"><a href="{{ url('/payment') }}" class="btn btn-success w-100"><i

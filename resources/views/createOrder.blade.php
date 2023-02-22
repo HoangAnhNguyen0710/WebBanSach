@@ -78,14 +78,6 @@
         <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script>
-            // ClassicEditor
-            //     .create(document.querySelector('#ckeditor1'))
-            //     .then(newEditor => {
-            //         editor = newEditor;
-            //     })
-            //     .catch(error => {
-            //         console.error(error);
-            //     });
             function submit_form(event) {
                 event.preventDefault();
                 var cart = Object.values({{Js::from($cart)}})
@@ -99,7 +91,7 @@
                     price: price,
                     discount_price: discountPrice,
                     order_items_list:  JSON.stringify(cart),
-                    customer_id: {{auth()->user() ? auth()->user()->id : null}}
+                    customer_id: {{auth()->user() ? auth()->user()->id : "null" }}
                 }).then(function(res) {
                     $('#submit-btn').attr('disabled', true);
                     if (confirm("Tạo đơn hàng thành công!")) document.location = '/';

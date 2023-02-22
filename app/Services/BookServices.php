@@ -22,7 +22,7 @@ class BookServices
         $this->publisherRepository = app(PublisherRepository::class);
         $this->categoryRepository = app(CategoryRepository::class);
     }
-    public function isAValidRecord($record, $categoryList, $publisherist)
+    public function isAValidRecord($record, $categoryList, $publisherList)
     {
         $errorRecord = [];
         if (empty($record['name'])) {
@@ -73,7 +73,7 @@ class BookServices
             $errorRecord['errorMSG'] = 'missing category id!\n';
             return $errorRecord;
         }
-        if (!in_array(['id' => $record['publisher_id']], $publisherist)) {
+        if (!in_array(['id' => $record['publisher_id']], $publisherList)) {
             $errorRecord['errorMSG'] = 'publisher id is not exist!\n';
             return $errorRecord;
         }
@@ -105,8 +105,8 @@ class BookServices
     }
     public function store(Request $request)
     {
-        $categoryList = $this->publisherRepository->getAll();
-        $publisherist = $this->categoryRepository->getAll();
+        $publisherList = $this->publisherRepository->getAll()->toArray();
+        $categoryList = $this->categoryRepository->getAll()->toArray();
         if ($request->file('fileUpload')) {
             $fileData = Reader::createFromPath($request->file('fileUpload')->getRealPath(), 'r');
             $fileData->setHeaderOffset(0);
@@ -115,7 +115,7 @@ class BookServices
             $offset = 0;
             foreach ($dataList as $record) {
                 $offset++;
-                $checked = $this->isAValidRecord($record, $categoryList, $publisherist);
+                $checked = $this->isAValidRecord($record, $categoryList, $publisherList);
                 if ($checked !== true) {
                     $errMSG = "line " . $offset . ": " . $checked['errorMSG'];
                     return $errMSG;
@@ -141,7 +141,7 @@ class BookServices
                 'publisher_id',
                 'category_id'
             ]), []);
-            $checked = $this->isAValidRecord($requestData,  $categoryList, $publisherist);
+            $checked = $this->isAValidRecord($requestData,  $categoryList, $publisherList);
             if ($checked !== true) {
                 $errMSG = $checked['errorMSG'];
                 return $errMSG;

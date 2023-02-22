@@ -6,19 +6,14 @@
         <div class="navbar-collapse collapse" id="navbarSupportedContent">
             <ul class="nav navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 flex align-items-center">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Trang chủ</a></li>
-                <li class="nav-item"><a class="nav-link" href="/">Sách bán chạy</a></li>
+                <li class="nav-item"><a class="nav-link" href="/bestseller">Sách bán chạy</a></li>
                 <li class="nav-item dropdown">
                     <button type="button" class="btn dropdown-toggle" id="navbarDropdown"
                         data-bs-toggle="dropdown" aria-expanded="false">Danh mục</button>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @foreach($categoryList as $category)
-                        <li><a class="dropdown-item" href="#!">{{$category['category_name']}}</a></li>
+                        <li><a class="dropdown-item" href="/filter?filterCol=category_id&filterValue={{$category['id']}}">{{$category['category_name']}}</a></li>
                         @endforeach
-                        {{-- <li>
-                            <hr class="dropdown-divider" />
-                        </li>
-                        <li><a class="dropdown-item" href="">Popular Items</a></li>
-                        <li><a class="dropdown-item" href="">New Arrivals</a></li> --}}
                     </ul>
                 </li>
                 @guest
@@ -35,9 +30,9 @@
                                 data-bs-toggle="dropdown" aria-expanded="false">Hi {{auth()->user()->name}}</button>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @if (auth()->user()->role == 'admin')
-                                <li><a class="dropdown-item" href="{{ route('admin-page') }}">Trang admin</a></li>
+                                <li><a class="dropdown-item" href="{{ route('adminPage') }}">Trang admin</a></li>
                                 @endif
-                                
+                                <li><a class="dropdown-item" href="{{ route('orderList') }}">Đơn hàng đã đặt</a></li>
                                 <li>
                                     <hr class="dropdown-divider" />
                                 </li>

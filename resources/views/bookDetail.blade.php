@@ -53,8 +53,8 @@
                             <div class="d-flex flex-column text-start">
                                 <!-- Product detail-->
                                 <h5 class="fw-bolder text-uppercase mb-4"><i class="bi bi-book-half"></i> {{$book['name']}}</h5>
-                                <span class="fs-6 mb-1">Đơn vị xuất bản: <a href="#">{{$book['publisher']['publisher_name']}}</a></span>
-                                <span class="fs-6 mb-1">Tác giả: <a href="#">{{$book['author_name']}}</a></span>
+                                <span class="fs-6 mb-1">Đơn vị xuất bản: <a href="/filter?filterCol=publisher_id&filterValue={{$book['publisher_id']}}">{{$book['publisher']['publisher_name']}}</a></span>
+                                <span class="fs-6 mb-1">Tác giả: <a href="/filter?filterCol=author_name&filterValue={{$book['author_name']}}">{{$book['author_name']}}</a></span>
                                 <span class="fs-6 mb-1">Ngôn ngữ: {{$book['language']}}</span>
                                 <span class="fs-6 mb-1">Số trang: {{$book['pages']}}</span>
                                 <span class="fs-6 mb-1">Tình trạng: 
