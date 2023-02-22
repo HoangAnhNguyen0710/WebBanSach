@@ -17,13 +17,13 @@
                         <form id="post_a_status" class="needs-validation" onsubmit="submit_form(event)">
                             <div class="mb-3 mt-3">
                                 <b><label for="customer_name">Họ tên người nhận :</label></b>
-                                <input type="text" placeholder="Nhập họ tên người nhận" name="customer_name"
+                                <input type="text" placeholder="Nhập họ tên người nhận" name="customer_name" value="{{auth()->user() ? auth()->user()->name : ""}}"
                                     id="customer_name" class="form-control mt-2 mb-3" required>
                                 <label for="customer_address">Địa chỉ:</label>
-                                <input type="text" placeholder="Nhập địa chỉ" name="customer_address"
+                                <input type="text" placeholder="Nhập địa chỉ" name="customer_address" value="{{auth()->user() ? auth()->user()->address : ""}}"
                                     id="customer_address" class="form-control mt-2 mb-3" required>
                                 <label for="customer_contact">SDT liên lạc:</label>
-                                <input type="text" placeholder="Nhập số điện thoại" name="customer_contact"
+                                <input type="text" placeholder="Nhập số điện thoại" name="customer_contact" value="{{auth()->user() ? auth()->user()->contact : ""}}"
                                     id="customer_contact" class="form-control mt-2 mb-3" required>
                                 <div class="">
                                     Đơn hàng
@@ -99,6 +99,7 @@
                     price: price,
                     discount_price: discountPrice,
                     order_items_list:  JSON.stringify(cart),
+                    customer_id: {{auth()->user() ? auth()->user()->id : null}}
                 }).then(function(res) {
                     $('#submit-btn').attr('disabled', true);
                     if (confirm("Tạo đơn hàng thành công!")) document.location = '/';

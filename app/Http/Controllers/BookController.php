@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateBookRequest;
 use App\Http\Requests\GetBookListRequest;
 use App\Services\BookServices;
+use App\Services\CategoryServices;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
     //
     protected $bookService;
+    protected $categoryService;
     public function __construct()
     {
         $this->bookService = app(BookServices::class);
+        $this->categoryService = app(CategoryServices::class);
     }
 
     public function store(CreateBookRequest $request)
@@ -82,8 +85,9 @@ class BookController extends Controller
     {
 
         $book = $this->bookService->getOneBook($id);
+        $categoryList = $this->categoryService->getAllWithColumnList(['id', 'category_name']);
         if ($book) {
-            return view('bookDetail', compact('book'));
+            return view('bookDetail', compact('book', 'categoryList'));
         }
         $message = 'THE BOOK WITH ID:' . $id . ' IS NOT EXIST';
         return view('bookDetail', compact('message'));
