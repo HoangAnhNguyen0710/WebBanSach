@@ -47,6 +47,7 @@ class BookRepository extends BaseRepository
             ->paginate($itemsPerPage, ['*'], 'page', $page);
     }
 
+
     public function getListOfBooks($page, $itemsPerPage = null, $sortCol = 'updated_at', $sortValue = 'desc')
     {
         return $this->model->query()->select(['id', 'publisher_id', 'category_id', 'name', 'sold', 'price', 'discount_price', 'updated_at'])
