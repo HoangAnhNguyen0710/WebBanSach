@@ -33,6 +33,20 @@ class PageController extends Controller
         }
         return view('home', compact('recentBook', 'bestSellerBook', 'bookByCategory', 'categoryList'));
     }
+    public function bestSeller(Request $request) {
+        if($request->only('page'))
+        $pageNum = $request->only('page')['page'];
+        else $pageNum = 1;
+        
+        if($request->only('items_per_page'))
+        $itemsPerPage = $request->only('items_per_page')['items_per_page'];
+        else $itemsPerPage = 5;
+
+        $bookList = $this->bookService->getListOfBooks($pageNum, $itemsPerPage, null, null, 'sold', 'desc');
+        $categoryList = $this->categoryService->getAllWithColumnList(['id', 'category_name']);
+        $filterValue = "Best Seller";
+        return view('filterBy', compact('bookList', 'categoryList', 'filterValue'));
+    }
 
     public function filter(Request $request) {
         if($request->only('page'))
@@ -59,6 +73,9 @@ class PageController extends Controller
 
     public function createOrder() {
         $categoryList = $this->categoryService->getAllWithColumnList(['id', 'category_name']);
+        if(session()->get('cart') == []) {
+            return redirect()->back();
+        }
         return view('createOrder', compact('categoryList'));
     }
 

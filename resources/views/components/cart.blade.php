@@ -49,7 +49,7 @@
                     <span class="fw-bolder"><strong>Total {{ $total }}đ</strong></span>
                 </div>
                 <div class="row">
-                    <div class="col"><a href="{{ url('/') }}" class="btn btn-warning w-100"><i
+                    <div class="col"><a href="{{ url('/') }}" class="btn btn-warning w-100" data-bs-dismiss="offcanvas" aria-label="Close"><i
                                 class="fa fa-angle-left"></i> Continue Shopping</a></div>
                     @if($total > 0)
                     <div class="col"><a href="{{ url('/payment') }}" class="btn btn-success w-100"><i

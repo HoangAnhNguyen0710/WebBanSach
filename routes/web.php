@@ -31,6 +31,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/filter', [PageController::class, 'filter'])->name('filter');
+Route::get('/bestseller', [PageController::class, 'bestSeller'])->name('bestseller');
 
 Route::middleware('auth')->group(function() {
     Route::get('/orderlist', [PageController::class, 'orderList'])->name('orderList');
